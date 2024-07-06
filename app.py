@@ -26,6 +26,10 @@ def preprocess_data(df):
     item_count_pivot = item_count_pivot.applymap(lambda x: 1 if x >= 1 else 0)
     return item_count_pivot
 
+@app.get("/")
+def read_root():
+    return {"message": "Sentiment Analysis API is running!"}
+
 @app.post("/apriori")
 async def apriori_api(request: AprioriRequest):
     try:
