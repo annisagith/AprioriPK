@@ -1,12 +1,12 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import pandas as pd
-from joblib import load
+import joblib
 
 app = FastAPI()
 
 # Load model
-rules = load('model.pkl')
+model = joblib.load('model.pkl')
 
 # Pydantic model untuk validasi input data
 class MenuItem(BaseModel):
@@ -40,9 +40,9 @@ async def apriori_api(request: AprioriRequest):
         support = request.support
         min_threshold = request.min_threshold
         
-        filtered_rules = rules[(rules['support'] >= support) & (rules['lift'] >= min_threshold)]
+        filtered_model = model[(model['support'] >= support) & (model['lift'] >= min_threshold)]
         
-        return filtered_rules.to_dict(orient='records')
+        return filtered_model.to_dict(orient='records')
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
 
