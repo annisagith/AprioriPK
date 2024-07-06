@@ -6,8 +6,8 @@ services:
     name: fastapi
     start: uvicorn apriori:app --host 0.0.0.0 --port $PORT
     github:
-      repo: kyasa422/Model-sentimen-analisis-makanan
-      branch: main # Ganti dengan branch yang sesuai jika tidak menggunakan main
+      repo: annisagith/AprioriPK
+      branch: master # Ganti dengan branch yang sesuai jika tidak menggunakan main
     env:
       PYTHON_VERSION: "3.8"
     buildCommand: pip install -r requirements.txt
