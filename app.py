@@ -44,7 +44,7 @@ def recommend_menu(rules, input_item):
 
 @app.get("/")
 def read_root():
-    return {"message": "Sentiment Analysis API is running!"}
+    return {"message": "rekomendasi API is running!"}
 
 @app.post("/apriori")
 async def apriori_api( request: AprioriRequest):
