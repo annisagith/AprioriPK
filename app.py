@@ -7,7 +7,7 @@ import joblib
 app = FastAPI()
 
 # Load model
-model = joblib.load('amodel.pkl')
+
 rules = joblib.load('rmodel.pkl')    
 
 
@@ -24,12 +24,6 @@ def preprocess_data(df):
     item_count_pivot = item_count_pivot.astype("int32")
     item_count_pivot = item_count_pivot.applymap(lambda x: 1 if x >= 1 else 0)
     return item_count_pivot
-
-# def build_apriori_model(item_count_pivot, support=0.01, metric="lift", min_threshold=1):
-#     frequent_items = apriori(item_count_pivot, min_support=support, use_colnames=True)
-#     rules = association_rules(frequent_items, metric=metric, min_threshold=min_threshold)[["antecedents", "consequents", "support", "confidence", "lift"]]
-#     return rules
-
 def recommend_menu(rules, input_item):
     filtered_rules = rules[rules['antecedents'].apply(lambda x: input_item in x)]
     if not filtered_rules.empty:
@@ -38,10 +32,6 @@ def recommend_menu(rules, input_item):
         return recommendations
     else:
         return {"message": "No recommendations found."}
-    # filtered_rules = filtered_rules.sort_values(by='confidence', ascending=False)
-    # recommendations = filtered_rules[['antecedents', 'consequents', 'support', 'confidence', 'lift']]
-    # return recommendations
-
 @app.get("/")
 def read_root():
     return {"message": "Sentiment Analysis API is running!"}
