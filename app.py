@@ -12,6 +12,7 @@ origins = [
     "http://localhost:8000",
     "http://127.0.0.1:8000",
     "https://pbl-production.up.railway.app/",
+    "https://pbl-production.up.railway.app/rekomendasi",
 ]
 
 app.add_middleware(
